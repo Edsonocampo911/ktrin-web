@@ -8,9 +8,11 @@ import LoginPage from './components/LoginPage'
 import RegisterPage from './components/RegisterPage'
 import ClientDashboard from './components/ClientDashboard'
 import ClientDashboardV2 from './components/ClientDashboardV2'
+import ClientDashboardV3 from './components/ClientDashboardV3'
 import ProviderDashboard from './components/ProviderDashboard'
 import CreateEvent from './components/CreateEvent'
 import CreateEventV2 from './components/CreateEventV2'
+import CreateEventV3 from './components/CreateEventV3'
 import ServiceManagement from './components/ServiceManagement'
 import PromotionalPackages from './components/PromotionalPackages'
 import IndividualServices from './components/IndividualServices'
@@ -95,11 +97,15 @@ function App() {
           />
           <Route 
             path="/dashboard/client" 
-            element={user && user.user_type === 'client' ? <ClientDashboard user={user} onLogout={handleLogout} /> : <Navigate to="/login" />} 
+            element={user && user.user_type === 'client' ? <ClientDashboard user={user} /> : <Navigate to="/login" />} 
           />
           <Route 
             path="/dashboard/client-v2" 
-            element={user && user.user_type === 'client' ? <ClientDashboardV2 user={user} onLogout={handleLogout} /> : <Navigate to="/login" />} 
+            element={user && user.user_type === 'client' ? <ClientDashboardV2 user={user} /> : <Navigate to="/login" />} 
+          />
+          <Route 
+            path="/dashboard/client-v3" 
+            element={user && user.user_type === 'client' ? <ClientDashboardV3 user={user} /> : <Navigate to="/login" />} 
           />
           <Route 
             path="/dashboard/provider" 
@@ -112,6 +118,10 @@ function App() {
           <Route 
             path="/create-event-v2" 
             element={user && user.user_type === 'client' ? <CreateEventV2 user={user} /> : <Navigate to="/login" />} 
+          />
+          <Route 
+            path="/create-event-v3" 
+            element={user && user.user_type === 'client' ? <CreateEventV3 user={user} /> : <Navigate to="/login" />} 
           />
           <Route 
             path="/manage-services" 
