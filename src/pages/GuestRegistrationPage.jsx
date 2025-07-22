@@ -1,0 +1,51 @@
+import { useParams, useSearchParams } from 'react-router-dom';
+import GuestRegistrationForm from '../components/guests/GuestRegistrationForm.jsx';
+import { Alert, AlertDescription } from '@/components/ui/alert.jsx';
+import { AlertTriangle } from 'lucide-react';
+
+const GuestRegistrationPage = () => {
+  const { eventId } = useParams();
+  const [searchParams] = useSearchParams();
+  const invitationCode = searchParams.get('code');
+
+  // Manejar éxito en registro
+  const handleRegistrationSuccess = (guestData) => {
+    console.log('Registro exitoso:', guestData);
+    // En el futuro, podrías redirigir a una página de confirmación
+  };
+
+  // Verificar que tenemos los parámetros necesarios
+  if (!eventId || !invitationCode) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 to-pink-100 p-4">
+        <div className="max-w-md w-full">
+          <Alert className="border-red-200 bg-red-50">
+            <AlertTriangle className="h-4 w-4" />
+            <AlertDescription className="text-red-800">
+              <div className="space-y-2">
+                <p className="font-medium">Enlace de invitación inválido</p>
+                <p>
+                  El enlace que has seguido no es válido o está incompleto.
+                </p>
+                <p className="text-sm">
+                  Por favor, verifica que hayas copiado el enlace completo o escanea nuevamente el código QR.
+                </p>
+              </div>
+            </AlertDescription>
+          </Alert>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <GuestRegistrationForm
+      eventId={eventId}
+      invitationCode={invitationCode}
+      onSuccess={handleRegistrationSuccess}
+    />
+  );
+};
+
+export default GuestRegistrationPage;
+
